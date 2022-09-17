@@ -4,9 +4,10 @@ import 'react-bootstrap/'
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import Container from "react-bootstrap/Container";
+import Modal from 'react-bootstrap/Modal'
 
-export default function Modal () {
+export default function AddProductModal (props) {
   const [ title, setTitle ] = useState("")
   const [ description, setDescription ] = useState("")
   const [ brand, setBrand ] = useState("")
@@ -14,13 +15,19 @@ export default function Modal () {
   const [ price, setPrice ] = useState(0)
   return (
     <>
-    <div className="container mb-5 mt-5">
-
-<Form onSubmit={ async (event) => {
- event.preventDefault()
- const reqParams = {
-   method: 'POST',
-   headers: { Accept: '*/*',
+<Modal {...props} size="lg" centered>
+  <Modal.Header>
+    <Modal.Title>
+      Adicionar produto
+    </Modal.Title>
+  </Modal.Header>
+<Modal.Body>
+  <Container className="mt-3 mb-3">
+  <Form onSubmit={ async (event) => {
+    event.preventDefault()
+    const reqParams = {
+    method: 'POST',
+    headers: { Accept: '*/*',
      'Content-Type': 'application/json'
    },
    body: JSON.stringify(
@@ -97,11 +104,16 @@ export default function Modal () {
    }} ></Form.Control>
  </Form.Group>    
 
- <Button type="submit" variant="primary">
-   Submit
+ <Button type="submit" variant="success">
+   Enviar
  </Button>
 </Form>
- </div>
+ </Container>
+</Modal.Body>
+ <Modal.Footer>
+   <Button variant="secondary" onClick={props.onHide}>Fechar</Button>
+ </Modal.Footer>
+</Modal>
     </>
   )
 }
