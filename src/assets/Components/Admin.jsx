@@ -7,6 +7,11 @@ import AddProductModal from "./ProductModal";
 import AddCategoryModal from "./CategoryModal";
 import Table from 'react-bootstrap/Table'
 import { AdminPageContext } from "../Contexts/AdminContext";
+import { BiPencil } from 'react-icons/bi'
+import { AiOutlineDelete } from 'react-icons/ai'
+import Swal from "sweetalert2";
+import Accordion from "react-bootstrap/Accordion";
+import ListGroup from "react-bootstrap/ListGroup";
 
 
 export default function Admin (props) {
@@ -25,6 +30,37 @@ export default function Admin (props) {
   }, [])
   const [ productModal, setProductModal ] = useState(false)
   const [ categoryModal, setCategoryModal ] = useState(false)
+  const handleDelete = async (id) => {
+    const reqParams = {
+        method: 'DELETE'
+    }
+    try {
+      const req = await fetch(`http://localhost:9000/products/${id}`, reqParams)
+      if (req.status == 204) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product deleted successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        .then(() => {
+          setProducts(products.filter((product) => {
+            return product.id !== id
+          }))
+        })
+      } 
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text:  'This action coult not be completed',
+          footer: `Error code ${response.status}: ${response.message}`
+        })
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   return (
     <>   
@@ -38,7 +74,7 @@ export default function Admin (props) {
     <AddCategoryModal show={categoryModal} onHide={() => setCategoryModal(false)}/>
     </Container>
    <hr/>
-    <Table responsive striped bordered hover variant="dark">
+    <Table className="text-center" responsive striped bordered hover variant="dark">
       <thead>
         <tr>
           <th>id</th>
@@ -47,6 +83,9 @@ export default function Admin (props) {
           <th>Marca</th>
           <th>Imagem</th>
           <th>Preço</th>
+          <th>Categorias</th>
+          <th>Editar</th>
+          <th>Deletar</th>
         </tr>
       </thead>
       <tbody>
@@ -59,6 +98,21 @@ export default function Admin (props) {
           <td>{element.brand}</td>
           <td>{element.image}</td>
           <td>{element.price}</td>
+          <td>
+            <Accordion className="text-center">    
+            <Accordion.Item key={element.id}>
+              <Accordion.Header>[]</Accordion.Header>
+                {element.categories.map((category, index) => {
+                  return (                 
+                    <Accordion.Body>ID({category.id}) - {category.name}</Accordion.Body>
+                  )
+                })                  
+                }    
+                 </Accordion.Item>     
+            </Accordion>
+            </td>
+          <td><Button variant="warning"><BiPencil /></Button></td>
+          <td><Button onClick={() => {handleDelete(element.id)}} variant="danger"><AiOutlineDelete/></Button></td>
         </tr>
           )
         })}

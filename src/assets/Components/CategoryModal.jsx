@@ -41,7 +41,7 @@ export default function AddCategoryModal (props) {
        showConfirmButton: false,
        timer: 1500
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
    else {
      Swal.fire({
@@ -51,7 +51,7 @@ export default function AddCategoryModal (props) {
        footer: `Error code ${response.status}: ${response.message}`,
        timer: 1500
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
  } catch (error) {
    console.log(error)
