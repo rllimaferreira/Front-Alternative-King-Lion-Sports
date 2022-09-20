@@ -49,7 +49,7 @@ export default function AddProductModal (props) {
        showConfirmButton: false,
        timer: 1500
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
    else {
      Swal.fire({
@@ -59,7 +59,7 @@ export default function AddProductModal (props) {
        footer: `Error code ${response.status}: ${response.message}`,
        timer: 1500
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
  } catch (error) {
    console.log(error)
@@ -76,7 +76,6 @@ export default function AddProductModal (props) {
    <Form.Label>Título</Form.Label>
    <Form.Control type="text" required onChange={(a) => {
      setTitle(a.target.value)
-     console.log(title)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
