@@ -104,7 +104,7 @@ export default function Admin (props) {
               <Accordion.Header>[]</Accordion.Header>
                 {element.categories.map((category, index) => {
                   return (                 
-                    <Accordion.Body>ID({category.id}) - {category.name}</Accordion.Body>
+                    <Accordion.Body>ID[{category.id}] - {category.name}</Accordion.Body>
                   )
                 })                  
                 }    
