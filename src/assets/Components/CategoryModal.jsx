@@ -47,14 +47,13 @@ export default function AddCategoryModal (props) {
      Swal.fire({
        icon: 'error',
        title: 'Oops...',
-       text: 'Action could not be done',
+       text: 'This action could not be done',
        footer: `Error code ${response.status}: ${response.message}`,
        timer: 1500
      })
      .then(() => props.onHide())
    }
  } catch (error) {
-   console.log(error)
    Swal.fire({
      icon: 'error',
      title: 'Oops...',

@@ -11,7 +11,8 @@ import { BiPencil } from 'react-icons/bi'
 import { AiOutlineDelete } from 'react-icons/ai'
 import Swal from "sweetalert2";
 import Accordion from "react-bootstrap/Accordion";
-import ListGroup from "react-bootstrap/ListGroup";
+import UpdateProductModal from "./AdminUpdateProductModal";
+
 
 
 export default function Admin (props) {
@@ -28,8 +29,11 @@ export default function Admin (props) {
     }
     fetchProducts()
   }, [])
+
   const [ productModal, setProductModal ] = useState(false)
   const [ categoryModal, setCategoryModal ] = useState(false)
+  const [ updateProductModal, setUpdateProductModal ] = useState(false)
+
   const handleDelete = async (id) => {
     const reqParams = {
         method: 'DELETE'
@@ -100,18 +104,23 @@ export default function Admin (props) {
           <td>{element.price}</td>
           <td>
             <Accordion className="text-center">    
-            <Accordion.Item key={element.id}>
+            <Accordion.Item key={element.id} eventKey="0">
               <Accordion.Header>[]</Accordion.Header>
                 {element.categories.map((category, index) => {
                   return (                 
-                    <Accordion.Body>ID[{category.id}] - {category.name}</Accordion.Body>
+                    <Accordion.Body key={index} >ID[{category.id}] - {category.name}</Accordion.Body>
                   )
                 })                  
                 }    
                  </Accordion.Item>     
             </Accordion>
             </td>
-          <td><Button variant="warning"><BiPencil /></Button></td>
+          <td>
+            <Button onClick={() => {setUpdateProductModal(true)}} variant="warning">
+            <BiPencil />
+            <UpdateProductModal id={element.id} show={updateProductModal} onHide={() => setUpdateProductModal(false)} />
+          </Button>
+          </td>
           <td><Button onClick={() => {handleDelete(element.id)}} variant="danger"><AiOutlineDelete/></Button></td>
         </tr>
           )
