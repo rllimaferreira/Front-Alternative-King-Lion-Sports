@@ -49,20 +49,19 @@ export default function AddProductModal (props) {
        showConfirmButton: false,
        timer: 1500
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
    else {
      Swal.fire({
        icon: 'error',
        title: 'Oops...',
-       text: 'Action could not be done',
+       text: 'This action could not be done',
        footer: `Error code ${response.status}: ${response.message}`,
-       timer: 1500
+       showConfirmButton: true
      })
-     .then(() => window.location.reload(false))
+     .then(() => props.onHide())
    }
  } catch (error) {
-   console.log(error)
    Swal.fire({
      icon: 'error',
      title: 'Oops...',
@@ -76,7 +75,6 @@ export default function AddProductModal (props) {
    <Form.Label>Título</Form.Label>
    <Form.Control type="text" required onChange={(a) => {
      setTitle(a.target.value)
-     console.log(title)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
@@ -99,7 +97,7 @@ export default function AddProductModal (props) {
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
    <Form.Label>Preço</Form.Label>
-   <Form.Control type="number" onChange={(e) => {
+   <Form.Control type="double" onChange={(e) => {
      setPrice(e.target.value)
    }} ></Form.Control>
  </Form.Group>    
