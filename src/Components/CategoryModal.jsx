@@ -80,4 +80,4 @@ export default function AddCategoryModal (props) {
  </Modal.Footer>
 </Modal>
     </>
-  )
+  )}
