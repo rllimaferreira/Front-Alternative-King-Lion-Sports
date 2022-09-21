@@ -1,11 +1,11 @@
 import 'react-bootstrap/'
 import Container from "react-bootstrap/Container"
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from "react-bootstrap/Carousel";
 
-import img_0 from '../imgs/wallpaperflare.com_wallpaper.jpg'
-import img_1 from '../imgs/wallpaperflare.com_wallpaper(1).jpg'
-import img_3 from '../imgs/wallpaperflare.com_wallpaper(3).jpg'
-import img_4 from '../imgs/wallpaperflare.com_wallpaper(4).jpg'
+import img_0 from '../../assets/imgs/wallpaperflare.com_wallpaper.jpg'
+import img_1 from '../../assets/imgs/wallpaperflare.com_wallpaper(1).jpg'
+import img_3 from '../../assets/imgs/wallpaperflare.com_wallpaper(3).jpg'
+import img_4 from '../../assets/imgs/wallpaperflare.com_wallpaper(4).jpg'
 
 import './Home.css'
 

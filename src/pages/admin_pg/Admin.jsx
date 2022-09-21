@@ -3,10 +3,10 @@ import 'react-bootstrap/'
 import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container"
-import AddProductModal from "./ProductModal";
-import AddCategoryModal from "./CategoryModal";
+import AddProductModal from "../../Components/ProductModal";
+import AddCategoryModal from "../../Components/CategoryModal";
 import Table from 'react-bootstrap/Table'
-import { AdminPageContext } from "../Contexts/AdminContext";
+import { AdminPageContext } from "../../Contexts/AdminContext";
 
 
 export default function Admin (props) {
