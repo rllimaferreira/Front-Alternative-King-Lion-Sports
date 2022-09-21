@@ -15,7 +15,7 @@ import UpdateProductModal from "./AdminUpdateProductModal";
 
 
 
-export default function Admin (props) {
+export default function Admin () {
   const { products, setProducts } = useContext(AdminPageContext)
   useEffect(() => {
     const fetchProducts = async () => {
@@ -32,7 +32,7 @@ export default function Admin (props) {
 
   const [ productModal, setProductModal ] = useState(false)
   const [ categoryModal, setCategoryModal ] = useState(false)
-  const [ updateProductModal, setUpdateProductModal ] = useState(false)
+  const [ updateProductModal, setUpdateProductModal ] = useState(undefined)
 
   const handleDelete = async (id) => {
     const reqParams = {
@@ -76,6 +76,8 @@ export default function Admin (props) {
       <Button onClick={() => {setCategoryModal(true)}} variant="primary">Adicionar categoria</Button>
     <AddProductModal show={productModal} onHide={() => setProductModal(false)}/>
     <AddCategoryModal show={categoryModal} onHide={() => setCategoryModal(false)}/>
+    <UpdateProductModal show={updateProductModal} id={updateProductModal} onHide={() => {setUpdateProductModal(undefined)}} />
+    
     </Container>
    <hr/>
     <Table className="text-center" responsive striped bordered hover variant="dark">
@@ -116,9 +118,11 @@ export default function Admin (props) {
             </Accordion>
             </td>
           <td>
-            <Button onClick={() => {setUpdateProductModal(true)}} variant="warning">
+            <Button onClick={() => {
+               setUpdateProductModal(element.id)
+              }} variant="warning">
             <BiPencil />
-            <UpdateProductModal id={element.id} show={updateProductModal} onHide={() => setUpdateProductModal(false)} />
+            
           </Button>
           </td>
           <td><Button onClick={() => {handleDelete(element.id)}} variant="danger"><AiOutlineDelete/></Button></td>

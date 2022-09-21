@@ -1,12 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Form from 'react-bootstrap/Form'
 import 'react-bootstrap/'
-import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 import Container from "react-bootstrap/Container";
 import Modal from 'react-bootstrap/Modal'
-import Products from "./Products";
+
 
 
 export default function UpdateProductModal (props) {
@@ -14,25 +13,29 @@ export default function UpdateProductModal (props) {
   const [ description, setDescription ] = useState("")
   const [ brand, setBrand ] = useState("")
   const [ image, setImage ] = useState("")
-  const [ price, setPrice ] = useState(null)
+  const [ price, setPrice ] = useState("")
   const [ categories, setCategories ] = useState([])
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const req = await fetch (`http://localhost:9000/products/${props.id}`)
-        const res = await req.json()
-        setTitle(res.title)
-        setDescription(res.description)
-        setBrand(res.brand)
-        setPrice(res.price)
-        setImage(res.image)
-        setCategories(res.categories)
-      } catch (error) {
-        console.error(error)
+  
+
+    useEffect(() => {
+   
+      const fetchProduct = async () => {
+        try {
+          const req = await fetch (`http://localhost:9000/products/${props.id}`)
+          const res = await req.json()
+          setTitle(res.title)
+          setDescription(res.description)
+          setBrand(res.brand)
+          setPrice(res.price)
+          setImage(res.image)
+          setCategories(res.categories)
+        } catch (error) {
+          console.error(error)
+        }
       }
-    }
-    fetchProduct()
-  }, [])
+      fetchProduct()
+    }, [props.id])
+  
   return (
     <>
     <Modal {...props} size="lg" centered>
@@ -46,13 +49,22 @@ export default function UpdateProductModal (props) {
   <Form onSubmit={ async (event) => {
     event.preventDefault()
     const reqParams = {
-    method: 'UPDATE'
+    method: 'PUT',
+    headers: { Accept: '*/*',
+    'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      title: title,
+      description: description,
+      brand: brand,
+      price: price,
+      image: image,
+      categories: categories
+    })
  }
  try {
-   const request = await fetch('http://localhost:9000/categories', reqParams)
-   const response = await request.json()
-   console.log(request)
-   if (request.ok) {
+   const response = await fetch(`http://localhost:9000/products/${props.id}`, reqParams)
+   console.log(response)
+   if (response.status == 200) {
      Swal.fire({
        icon: 'success',
        title: 'Product updated successfully',
@@ -67,7 +79,7 @@ export default function UpdateProductModal (props) {
        title: 'Oops...',
        text: 'This action could not be done',
        footer: `Error code ${response.status}: ${response.message}`,
-       timer: 1500
+       showConfirmButton: true
      })
      .then(() => props.onHide())
    }
@@ -83,31 +95,31 @@ export default function UpdateProductModal (props) {
 }}>
  <Form.Group className="mb-3" controlId="product">
    <Form.Label>Título</Form.Label>
-   <Form.Control type="text" required onChange={(e) => {
+   <Form.Control value={title || ""} type="text" required onChange={(e) => {
      setTitle(e.target.value)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
    <Form.Label>Descrição</Form.Label>
-   <Form.Control type="text" onChange={(e) => {
+   <Form.Control value={description || ""} type="text" onChange={(e) => {
      setDescription(e.target.value)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
    <Form.Label>Marca</Form.Label>
-   <Form.Control type="text" onChange={(e) => {
+   <Form.Control value={brand || ""} type="text" onChange={(e) => {
      setBrand(e.target.value)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
    <Form.Label>Imagem</Form.Label>
-   <Form.Control type="text" onChange={(e) => {
+   <Form.Control value={image || ""} type="text" onChange={(e) => {
      setImage(e.target.value)
    }} ></Form.Control>
  </Form.Group>
  <Form.Group className="mb-3" required controlId="product">
    <Form.Label>Preço</Form.Label>
-   <Form.Control type="number" onChange={(e) => {
+   <Form.Control value={price || ""}  type="number" onChange={(e) => {
      setPrice(e.target.value)
    }} ></Form.Control>
  </Form.Group>    
@@ -119,7 +131,7 @@ export default function UpdateProductModal (props) {
  </Container>
 </Modal.Body>
  <Modal.Footer>
-   <Button variant="secondary" onClick={props.onHide()}>Fechar</Button>
+   <Button variant="secondary" onClick={props.onHide}>Fechar</Button>
  </Modal.Footer>
 </Modal>
     </>
