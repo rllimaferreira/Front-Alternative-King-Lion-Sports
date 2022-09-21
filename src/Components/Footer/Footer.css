@@ -6,3 +6,39 @@
   border-radius: 0px 0px 10px 10px;
   border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
+.navFooter{
+  line-height: 2rem;
+}
+.navgationItem {
+  padding: 2px;
+  margin: 2px;
+}
+
+.lineBreakSmall{
+  margin: 8px;
+  height: 1px;
+  width: 10rem;
+  background-color: #000000;
+}
+.lineBreakBig{
+  margin: 8px;
+  height: 1px;
+  width: 18rem;
+  background-color: #000000;
+}
+
+.socialIco{
+  margin: 8px;
+}
+
+.textStyleFooter{
+  font-size: 1.1rem;
+  
+  font-weight: 500;
+ 
+}
+.copyRightText{
+  padding: 6px;
+  max-width:635px
+}
+
