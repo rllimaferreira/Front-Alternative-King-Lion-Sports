@@ -1,13 +1,15 @@
 import React from "react";
 import Form from 'react-bootstrap/Form'
 import 'react-bootstrap/'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 import Container from "react-bootstrap/Container";
 import Modal from 'react-bootstrap/Modal'
+import { ProductsContext } from "../Contexts/ProductsContext";
 
 export default function AddProductModal (props) {
+  const { products, setProducts } = useContext(ProductsContext)
   const [ title, setTitle ] = useState("")
   const [ description, setDescription ] = useState("")
   const [ brand, setBrand ] = useState("")
@@ -17,7 +19,7 @@ export default function AddProductModal (props) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const req = await fetch(`http://localhost:8080/categories`)
+        const req = await fetch(`http://52.53.150.144:8081/categories`)
         const res = await req.json()
         setCategories(res)
       } catch (error) {
@@ -54,15 +56,19 @@ export default function AddProductModal (props) {
    )
  }
  try {
-   const response = await fetch('http://localhost:8080/products', reqParams)
-   if (response.status == 201) {
+   const request = await fetch('http://52.53.150.144:8081/products', reqParams)
+   const response = await request.json()
+   if (request.status == 201) {
      Swal.fire({
        icon: 'success',
        title: 'Product added successfully',
        showConfirmButton: false,
        timer: 1500
      })
-     .then(() => props.onHide())
+     .then(() => {
+      props.onHide()
+      setProducts([...products, response])
+    })
    }
    else {
      Swal.fire({

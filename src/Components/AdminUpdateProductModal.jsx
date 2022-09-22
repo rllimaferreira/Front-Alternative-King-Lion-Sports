@@ -21,7 +21,7 @@ export default function UpdateProductModal (props) {
    
       const fetchProduct = async () => {
         try {
-          const req = await fetch (`http://localhost:8080/products/${props.id}`)
+          const req = await fetch (`http://52.53.150.144:8081/products/${props.id}`)
           const res = await req.json()
           setTitle(res.title)
           setDescription(res.description)
@@ -62,7 +62,7 @@ export default function UpdateProductModal (props) {
     })
  }
  try {
-   const response = await fetch(`http://localhost:8080/products/${props.id}`, reqParams)
+   const response = await fetch(`http://52.53.150.144:8081/products/${props.id}`, reqParams)
    console.log(response)
    if (response.status == 200) {
      Swal.fire({
