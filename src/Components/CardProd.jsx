@@ -1,5 +1,6 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from "react-bootstrap/Container"
 import { useEffect, useState } from "react";
 
 function CardCont({prod}) {
@@ -21,13 +22,13 @@ function CardProd() {
     const [prods, definirProds] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:9000/products')
+       fetch('http://localhost:9000/products')
 
             .then((respostaDoServidor) => {
                 return respostaDoServidor.json();
             })
             .then((resJson) => {               
-                definirProds(resJson.Array)
+                definirProds(resJson)
             });  
     },[]);
     return(<Container className="mt-3">{prods.map((prod, indice) => <CardCont key={indice} prod={prod}/>)}</Container> 
