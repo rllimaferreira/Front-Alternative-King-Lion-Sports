@@ -13,6 +13,19 @@ export default function AddProductModal (props) {
   const [ brand, setBrand ] = useState("")
   const [ image, setImage ] = useState("")
   const [ price, setPrice ] = useState(0)
+  const [ categories, setCategories ] = useState([])
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const req = await fetch(`http://localhost:8080/categories`)
+        const res = await req.json()
+        setCategories(res)
+      } catch (error) {
+        console.error(error)
+      }
+    }
+    fetchCategories()
+  }, [])
   return (
     <>
 <Modal {...props} size="lg" centered>
@@ -41,7 +54,7 @@ export default function AddProductModal (props) {
    )
  }
  try {
-   const response = await fetch('http://localhost:9000/products', reqParams)
+   const response = await fetch('http://localhost:8080/products', reqParams)
    if (response.status == 201) {
      Swal.fire({
        icon: 'success',
@@ -71,36 +84,42 @@ export default function AddProductModal (props) {
  }
  
 }}>
- <Form.Group className="mb-3" controlId="product">
+ <Form.Group className="mb-3" controlId="productTitle">
    <Form.Label>Título</Form.Label>
    <Form.Control type="text" required onChange={(a) => {
      setTitle(a.target.value)
    }} ></Form.Control>
  </Form.Group>
- <Form.Group className="mb-3" required controlId="product">
+ <Form.Group className="mb-3" required controlId="productDesc">
    <Form.Label>Descrição</Form.Label>
    <Form.Control type="text" onChange={(b) => {
      setDescription(b.target.value)
    }} ></Form.Control>
  </Form.Group>
- <Form.Group className="mb-3" required controlId="product">
+ <Form.Group className="mb-3" required controlId="productBrand">
    <Form.Label>Marca</Form.Label>
    <Form.Control type="text" onChange={(c) => {
      setBrand(c.target.value)
    }} ></Form.Control>
  </Form.Group>
- <Form.Group className="mb-3" required controlId="product">
+ <Form.Group className="mb-3" required controlId="productImage">
    <Form.Label>Imagem</Form.Label>
    <Form.Control type="text" onChange={(d) => {
      setImage(d.target.value)
    }} ></Form.Control>
  </Form.Group>
- <Form.Group className="mb-3" required controlId="product">
+ <Form.Group className="mb-3" required controlId="productPrice">
    <Form.Label>Preço</Form.Label>
-   <Form.Control type="double" onChange={(e) => {
+   <Form.Control type="number" onChange={(e) => {
      setPrice(e.target.value)
    }} ></Form.Control>
- </Form.Group>    
+ </Form.Group>  
+ <Form.Group className="mb-3" required controlId="productCategories">
+   <Form.Label>Categorias</Form.Label>
+   <Form.Control value={JSON.stringify(categories)} type="text" onChange={(e) => {
+     setPrice(e.target.value)
+   }} ></Form.Control>
+ </Form.Group>     
 
  <Button type="submit" variant="success">
    Enviar

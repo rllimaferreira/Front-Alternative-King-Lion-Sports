@@ -33,11 +33,11 @@ export default function AddCategoryModal (props) {
    )
  }
  try {
-   const response = await fetch('http://localhost:9000/categories', reqParams)
+   const response = await fetch('http://localhost:8080/categories', reqParams)
    if (response.status == 201) {
      Swal.fire({
        icon: 'success',
-       title: 'Product added successfully',
+       title: 'Category added successfully',
        showConfirmButton: false,
        timer: 1500
      })
@@ -80,4 +80,5 @@ export default function AddCategoryModal (props) {
  </Modal.Footer>
 </Modal>
     </>
-  )}
+  )
+}
