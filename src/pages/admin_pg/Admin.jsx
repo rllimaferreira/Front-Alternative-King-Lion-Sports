@@ -9,12 +9,12 @@ import Table from 'react-bootstrap/Table'
 import { AdminPageContext } from "../../Contexts/AdminContext";
 
 
-export default function Admin (props) {
+export default function Admin () {
   const { products, setProducts } = useContext(AdminPageContext)
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await fetch('http://localhost:9000/products')
+        const request = await fetch('http://localhost:8080/products')
         const response = await request.json()
         setProducts(response)
       } catch (error) {
@@ -23,8 +23,42 @@ export default function Admin (props) {
     }
     fetchProducts()
   }, [])
+
   const [ productModal, setProductModal ] = useState(false)
   const [ categoryModal, setCategoryModal ] = useState(false)
+  const [ updateProductModal, setUpdateProductModal ] = useState(undefined)
+
+  const handleDelete = async (id) => {
+    const reqParams = {
+        method: 'DELETE'
+    }
+    try {
+      const req = await fetch(`http://localhost:9000/products/${id}`, reqParams)
+      if (req.status == 204) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Product deleted successfully',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        .then(() => {
+          setProducts(products.filter((product) => {
+            return product.id !== id
+          }))
+        })
+      } 
+      else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text:  'This action coult not be completed',
+          footer: `Error code ${response.status}: ${response.message}`
+        })
+      }
+    } catch (error) {
+      console.error(error.message)
+    }
+  }
 
   return (
     <>   
@@ -36,9 +70,11 @@ export default function Admin (props) {
       <Button onClick={() => {setCategoryModal(true)}} variant="primary">Adicionar categoria</Button>
     <AddProductModal show={productModal} onHide={() => setProductModal(false)}/>
     <AddCategoryModal show={categoryModal} onHide={() => setCategoryModal(false)}/>
+    <UpdateProductModal show={updateProductModal} id={updateProductModal} onHide={() => {setUpdateProductModal(undefined)}} />
+    
     </Container>
    <hr/>
-    <Table responsive striped bordered hover variant="dark">
+    <Table className="text-center" responsive striped bordered hover variant="dark">
       <thead>
         <tr>
           <th>id</th>
@@ -47,6 +83,9 @@ export default function Admin (props) {
           <th>Marca</th>
           <th>Imagem</th>
           <th>Preço</th>
+          <th>Categorias</th>
+          <th>Editar</th>
+          <th>Deletar</th>
         </tr>
       </thead>
       <tbody>
@@ -59,6 +98,28 @@ export default function Admin (props) {
           <td>{element.brand}</td>
           <td>{element.image}</td>
           <td>{element.price}</td>
+          <td>
+            <Accordion className="text-center">    
+            <Accordion.Item key={element.id} eventKey="0">
+              <Accordion.Header>[]</Accordion.Header>
+                {element.categories.map((category, index) => {
+                  return (                 
+                    <Accordion.Body key={index} >ID[{category.id}] - {category.name}</Accordion.Body>
+                  )
+                })                  
+                }    
+                 </Accordion.Item>     
+            </Accordion>
+            </td>
+          <td>
+            <Button onClick={() => {
+               setUpdateProductModal(element.id)
+              }} variant="warning">
+            <BiPencil />
+            
+          </Button>
+          </td>
+          <td><Button onClick={() => {handleDelete(element.id)}} variant="danger"><AiOutlineDelete/></Button></td>
         </tr>
           )
         })}
