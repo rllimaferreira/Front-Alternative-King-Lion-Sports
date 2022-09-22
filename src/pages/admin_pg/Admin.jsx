@@ -1,6 +1,6 @@
 import React from "react";
 import 'react-bootstrap/'
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { ProductsContext } from "../../Contexts/ProductsContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container"
@@ -40,7 +40,7 @@ export default function Admin () {
         method: 'DELETE'
     }
     try {
-      const req = await fetch(`http://localhost:8080/products/${id}`, reqParams)
+      const req = await fetch(`http://52.53.150.144:8081/products/${id}`, reqParams)
       if (req.status == 204) {
         Swal.fire({
           icon: 'success',
@@ -110,7 +110,7 @@ export default function Admin () {
             <Accordion.Item key={element.id} eventKey="0">
               <Accordion.Header>[]</Accordion.Header>
                 {element.categories.map((category, index) => {
-                  console.log("teste")
+          
                   return (                 
                     <Accordion.Body key={index} >ID[{category.id}] - {category.name}</Accordion.Body>
                     
