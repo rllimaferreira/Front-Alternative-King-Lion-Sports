@@ -8,16 +8,15 @@ function CardCont({prod}) {
     <Card style={{ width: '18rem' }}>
       <Card.Img variant="top" src={prod.image} />
       <Card.Body>
-        <Card.Title>Card Title</Card.Title>
-        <Card.Text>
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
-        </Card.Text>
-        <Button variant="primary">buy now!</Button>
+        <Card.Title>{prod.title}</Card.Title>
+        <Card.Title>{prod.price}</Card.Title>
+        <Card.Text>{prod.brand}</Card.Text>
+        <Card.Text>{prod.description}</Card.Text>
+        <Button variant="primary">test para link</Button>
       </Card.Body>
     </Card>
     </>);
-} // título, descrição, imagem, avaliação
+} // título*, descrição*, imagem*, avaliação
 function CardProd() {
     const [prods, definirProds] = useState([]);
 

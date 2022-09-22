@@ -8,7 +8,6 @@ export default function Products() {
         <Container className="mt-3">
             <h1>Products</h1>
             <hr/>
-
             <CardProd/>
         </Container>    
         </>
