@@ -1,7 +1,7 @@
 import React from "react";
 import Form from 'react-bootstrap/Form'
 import 'react-bootstrap/'
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Swal from "sweetalert2";
 import Container from "react-bootstrap/Container";
@@ -117,7 +117,7 @@ export default function AddProductModal (props) {
  <Form.Group className="mb-3" required controlId="productCategories">
    <Form.Label>Categorias</Form.Label>
    <Form.Control value={JSON.stringify(categories)} type="text" onChange={(e) => {
-     setPrice(e.target.value)
+     setCategories(e.target.value)
    }} ></Form.Control>
  </Form.Group>     
 

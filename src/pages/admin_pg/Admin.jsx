@@ -1,28 +1,35 @@
 import React from "react";
 import 'react-bootstrap/'
 import { useState, useEffect, useContext } from "react";
+import { ProductsContext } from "../../Contexts/ProductsContext";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container"
+import Table from 'react-bootstrap/Table'
+import Accordion from 'react-bootstrap/Accordion'
+import { BiPencil } from 'react-icons/bi'
+import { AiOutlineDelete } from 'react-icons/ai'
+import Swal from "sweetalert2";
 import AddProductModal from "../../Components/ProductModal";
 import AddCategoryModal from "../../Components/CategoryModal";
-import Table from 'react-bootstrap/Table'
-import { AdminPageContext } from "../../Contexts/AdminContext";
+import UpdateProductModal from "../../Components/AdminUpdateProductModal";
+
+
 
 
 export default function Admin () {
-  const { products, setProducts } = useContext(AdminPageContext)
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const request = await fetch('http://localhost:8080/products')
-        const response = await request.json()
-        setProducts(response)
-      } catch (error) {
-        console.error(error.message)
-      }      
-    }
-    fetchProducts()
-  }, [])
+  const { products, setProducts } = useContext(ProductsContext)
+  // useEffect(() => {
+  //   const fetchProducts = async () => {
+  //     try {
+  //       const request = await fetch('http://localhost:8080/products')
+  //       const response = await request.json()
+  //       setProducts(response)
+  //     } catch (error) {
+  //       console.error(error.message)
+  //     }      
+  //   }
+  //   fetchProducts()
+  // }, [])
 
   const [ productModal, setProductModal ] = useState(false)
   const [ categoryModal, setCategoryModal ] = useState(false)
@@ -33,7 +40,7 @@ export default function Admin () {
         method: 'DELETE'
     }
     try {
-      const req = await fetch(`http://localhost:9000/products/${id}`, reqParams)
+      const req = await fetch(`http://localhost:8080/products/${id}`, reqParams)
       if (req.status == 204) {
         Swal.fire({
           icon: 'success',
@@ -103,8 +110,10 @@ export default function Admin () {
             <Accordion.Item key={element.id} eventKey="0">
               <Accordion.Header>[]</Accordion.Header>
                 {element.categories.map((category, index) => {
+                  console.log("teste")
                   return (                 
                     <Accordion.Body key={index} >ID[{category.id}] - {category.name}</Accordion.Body>
+                    
                   )
                 })                  
                 }    
