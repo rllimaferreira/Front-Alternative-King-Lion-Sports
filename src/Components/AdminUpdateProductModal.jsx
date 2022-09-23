@@ -15,7 +15,20 @@ export default function UpdateProductModal (props) {
   const [ image, setImage ] = useState("")
   const [ price, setPrice ] = useState("")
   const [ categories, setCategories ] = useState([])
-  
+  const [ selectedCategories, setSelectedCategories ] = useState([])
+
+  const handleCategories = (category) => {
+    console.log(category)
+    if (category.checked == false) {
+     
+      setSelectedCategories(selectedCategories.filter(element => {
+        return category.id !== element.id
+      }))
+    }
+    else {
+      setSelectedCategories([...selectedCategories, {"id": category.id}])
+    }
+  }
 
     useEffect(() => {
    
@@ -29,6 +42,7 @@ export default function UpdateProductModal (props) {
           setPrice(res.price)
           setImage(res.image)
           setCategories(res.categories)
+          setSelectedCategories(res.categories)
         } catch (error) {
           console.error(error)
         }
@@ -58,12 +72,11 @@ export default function UpdateProductModal (props) {
       brand: brand,
       price: price,
       image: image,
-      categories: categories
+      categories: selectedCategories
     })
  }
  try {
    const response = await fetch(`http://52.53.150.144:8081/products/${props.id}`, reqParams)
-   console.log(response)
    if (response.status == 200) {
      Swal.fire({
        icon: 'success',
@@ -123,6 +136,33 @@ export default function UpdateProductModal (props) {
      setPrice(e.target.value)
    }} ></Form.Control>
  </Form.Group>    
+ <Form.Group className="mb-3" required controlId="productCategories">
+   <Form.Label>Categorias</Form.Label>
+   {/* <Form.Control type="text" onChange={(e) => {
+     setCategories(e.target.value)
+   }} ></Form.Control> */}
+   {categories && categories.map((category, index) => {
+    return (
+       ['checkbox'].map((type) => (
+    <div key={`inline-${type}`} className="mb-1">
+      <Form.Check 
+        inline
+        label={category.name}
+        name="categoriesCheckbox"
+        type={type}
+        defaultChecked
+        id={category.id}
+        onChange={(input) => {
+          handleCategories(input.target)
+        }}
+      />
+    </div>
+   ))
+    )
+   
+   })}
+   
+ </Form.Group>     
 
  <Button type="submit" variant="success">
    Enviar
