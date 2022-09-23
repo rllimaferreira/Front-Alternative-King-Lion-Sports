@@ -15,7 +15,18 @@ export default function AddProductModal (props) {
   const [ brand, setBrand ] = useState("")
   const [ image, setImage ] = useState("")
   const [ price, setPrice ] = useState(0)
-  const [ categories, setCategories ] = useState([])
+  const [ categories, setCategories ] = useState([]) 
+  const [ selectedCategories, setSelectedCategories ] = useState([])
+  const handleCategories = (category) => {
+    if (category.checked == true) {
+      setSelectedCategories([...selectedCategories, {"id": category.id}])
+    }
+    else {
+      setSelectedCategories(selectedCategories.filter(element => {
+        return category.id !== element.id
+      }))
+    }
+  }
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -51,7 +62,8 @@ export default function AddProductModal (props) {
        description: description,
        brand: brand,
        image: image,
-       price: price
+       price: price,
+       categories: selectedCategories
      }
    )
  }
@@ -122,9 +134,29 @@ export default function AddProductModal (props) {
  </Form.Group>  
  <Form.Group className="mb-3" required controlId="productCategories">
    <Form.Label>Categorias</Form.Label>
-   <Form.Control value={JSON.stringify(categories)} type="text" onChange={(e) => {
+   {/* <Form.Control type="text" onChange={(e) => {
      setCategories(e.target.value)
-   }} ></Form.Control>
+   }} ></Form.Control> */}
+   {categories && categories.map((category, index) => {
+    return (
+       ['checkbox'].map((type) => (
+    <div key={`inline-${type}`} className="mb-1">
+      <Form.Check 
+        inline
+        label={category.name}
+        name="categoriesCheckbox"
+        type={type}
+        id={category.id}
+        onChange={(input) => {
+          handleCategories(input.target)
+        }}
+      />
+    </div>
+   ))
+    )
+   
+   })}
+   
  </Form.Group>     
 
  <Button type="submit" variant="success">
