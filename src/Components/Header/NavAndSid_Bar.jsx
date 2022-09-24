@@ -12,11 +12,10 @@ function NavAndSid_Bar() {
         <Container>
           <Navbar.Brand>
            <Link to="/">
-              <img width="32"
-                height="32"
+              <img width="40"
+                height="40"
                 src={LogomarcaIco} />
             </Link>
-            &nbsp;
           </Navbar.Brand>
           
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
