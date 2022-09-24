@@ -8,13 +8,9 @@ export default function Products() {
         <Container className="mt-3">
             <h1>Products</h1>
             <hr/>
-<<<<<<< HEAD
             <Container className="mt-3 d-flex justify-content-center">
             <CardProd />
             </Container>
-=======
-            <CardProd/>
->>>>>>> main
         </Container>    
         </>
     );
