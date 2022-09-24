@@ -10,6 +10,7 @@ function CardCont({ prod }) {
       <Card.Img src={prod.image} />
       <Card.Body>
         <Card.Title>{prod.title}</Card.Title>
+<<<<<<< HEAD
         <Card.Title>R$: {prod.price}</Card.Title>
         <Card.Text>{prod.brand}</Card.Text>
         <Card.Text>{prod.description}</Card.Text>
@@ -19,6 +20,15 @@ function CardCont({ prod }) {
       </Card.Body>
     </Card>
   </>);
+=======
+        <Card.Title>{prod.price}</Card.Title>
+        <Card.Text>{prod.brand}</Card.Text>
+        <Card.Text>{prod.description}</Card.Text>
+        <Button variant="primary">test para link</Button>
+      </Card.Body>
+    </Card>
+    </>);
+>>>>>>> main
 } // título*, descrição*, imagem*, avaliação
 function CardProd() {
   const [prods, definirProds] = useState([]);

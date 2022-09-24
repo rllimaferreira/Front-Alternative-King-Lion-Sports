@@ -1,7 +1,7 @@
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
-import { AdminPageContextProvider } from './Contexts/AdminContext';
+import { ProductsContextProvider } from './Contexts/ProductsContext';
 import NavAndSid_Bar from './Components/Header/NavAndSid_Bar';
 import Footer from './Components/Footer/Footer';
 import Home from './pages/home_pg/Home';
@@ -18,7 +18,7 @@ function App() {
   return (
   <>
   <NavAndSid_Bar/>
-  <AdminPageContextProvider>
+  <ProductsContextProvider>
   <Routes>
     <Route path="/" element={<Home />}/>
     <Route path='/pg_admin' element={<Admin />}/>
@@ -30,7 +30,7 @@ function App() {
     <Route path='/pg_prod' element={<Prod />}/>
 
   </Routes>
-  </AdminPageContextProvider>
+  </ProductsContextProvider>
   <Footer/>
   </>
   )
