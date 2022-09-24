@@ -5,7 +5,7 @@ export default function Carrinho() {
     return (
         <>
         <Container className="mt-3">
-            <h1>Carrinho</h1>
+            <h1>Cart</h1>
             <hr/>
         </Container>    
         </>

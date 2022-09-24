@@ -11,7 +11,7 @@ import Categories from './pages/categories_pg/Categories';
 import Carrinho from './pages/carrinho_pg/Carrinho';
 import Sobre from './pages/sobre_pg/Sobre';
 import Errorpg from './pages/error_pg/Errorpg';
-
+import Prod from './pages/prod_pg/prod';
 
 function App() {
   
@@ -26,7 +26,9 @@ function App() {
     <Route path='/pg_categories' element={<Categories />}/>
     <Route path='/pg_carrinho' element={<Carrinho />}/>
     <Route path='/pg_sobre' element={<Sobre />}/>
-    <Route path='/pg_404' element={<Errorpg />}/>
+    <Route path='/pg_404' element={<Errorpg />}/>    
+    <Route path='/pg_prod' element={<Prod />}/>
+
   </Routes>
   </ProductsContextProvider>
   <Footer/>
