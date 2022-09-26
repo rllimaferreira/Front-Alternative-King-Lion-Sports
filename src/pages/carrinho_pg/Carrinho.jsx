@@ -3,109 +3,7 @@ import "react-bootstrap/";
 import { Card, Button, Container } from "react-bootstrap/";
 import { Link } from "react-router-dom";
 import EmptyCart from "../../Components/EmptyCart";
-
-let productList = [
-  {
-    title: "Produto teste",
-    image: "https://imgnike-a.akamaihd.net/1300x1300/01091215.jpg",
-    price: 99.9
-  },
-  {
-    title: "Produto teste",
-    image: "https://imgnike-a.akamaihd.net/1300x1300/01091215.jpg",
-    price: 99.9
-  }
-];
-class Product extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      qnty: 0
-    };
-    // eventos
-    this.add = this.add.bind(this);
-    this.remove = this.remove.bind(this);
-  }
-
-  add() {
-    this.setState({
-      qnty: this.state.qnty + 1
-    });
-  }
-  remove() {
-    this.setState({
-      qnty: this.state.qnty - 1
-    });
-  }
-  // removeAll(){
-  //   this.setState({
-  //     qnty: this.state.qnty = 0
-  //   })
-  // }
-  render() {
-    return (
-      <>
-        <div className="row form-group">
-          <div className="col-sm-10">
-            <h4>
-              {this.props.title} : R${this.props.price}
-            </h4>
-          </div>
-          <div className="col-sm-2 text-right">Quantity: {this.props.qnty}</div>
-          <div className="row btn-toolbar">
-            <div className="col-6">
-              <button className="btn btn-outline-primary">Product Info</button>
-            </div>
-            <div className="col-6 text-right">
-              <button className="btn btn-outline-primary" onClick={"this.add"}>
-                +
-              </button>
-              <button
-                className="btn btn-outline-primary"
-                onClick={"this.remove"}
-              >
-                -
-              </button>
-            </div>
-          </div>
-        </div>
-        <hr />
-      </>
-    );
-  }
-}
-
-class CartList extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productList: ""
-    };
-  }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ productList: productList });
-    }, 1000);
-  }
-  render() {
-    if (!this.state.productList) return <EmptyCart />;
-    
-    
-
-    var component = this;
-    var products = this.state.productList.map(function (product) {
-      return (
-        <Product
-        title={product.title}
-        image={product.image}
-        price={product.price}
-        />
-      );
-    });
-
-    return ({ products });
-  }
-}
+import "./Carrinho.css";
 
 export default function Carrinho() {
   return (
@@ -284,8 +182,81 @@ export default function Carrinho() {
             </Button>
           </div>
 
-          <CartList />
-          
+          <EmptyCart />
+
+          <div className="cartItem container d-flex flex-column w-75">
+            {/* desktop cartItem */}
+            <div className="d-none d-md-flex d-xl-flex flex-row justify-content-between ">
+              <div className="itemInfo d-flex flex-row">
+                <img src="https://images.kabum.com.br/produtos/fotos/359543/notebook-lenovo-ultrafino-ideapad-3i-intel-core-i7-10510u-geforce-mx330-8gb-ram-ssd-256gb-15-6-full-hd-windows-11-prata-82bs000hbr_1656619969_gg.jpg" />
+
+                <h4 className="cartItemName">Título Teste</h4>
+              </div>
+
+              <div className="d-flex flex-column align-items-center">
+                <h4>Quantity</h4>
+                <div>
+                  <button
+                    className="btn btn-outline-primary"
+                    // onClick={"this.add"}
+                  >
+                    +
+                  </button>
+                  1
+                  <button
+                    className="btn btn-outline-primary"
+                    // onClick={"this.remove"}
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+              <div className="d-flex flex-column align-items-center">
+                <h4>Price</h4>
+                <div className="priceText">R$18,00</div>
+              </div>
+            </div>
+
+            {/* mobile cartItem */}
+            <div className="d-sm-flex d-md-none d-xl-none flex-column mt-1">
+              <div className="itemInfo d-flex flex-row">
+                <img src="https://images.kabum.com.br/produtos/fotos/359543/notebook-lenovo-ultrafino-ideapad-3i-intel-core-i7-10510u-geforce-mx330-8gb-ram-ssd-256gb-15-6-full-hd-windows-11-prata-82bs000hbr_1656619969_gg.jpg" />
+                <div className="d-flex flex-column">
+                  <h4 className="cartItemName text-center">
+                    Notebook lenove ideapad fodao
+                  </h4>
+                  <div className="priceText text-center">
+                    <div>
+                    Itens Price
+                    </div>
+                    R$18,00</div>
+                </div>
+              </div>
+
+              <div className="d-flex flex-column align-items-center mt-3">
+                <h4>Quantity</h4>
+                <div>
+                  <button
+                    className="btn btn-outline-primary"
+                    // onClick={"this.add"}
+                  >
+                    +
+                  </button>
+                  1
+                  <button
+                    className="btn btn-outline-primary"
+                    // onClick={"this.remove"}
+                  >
+                    -
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <hr />
+          </div>
+
+        
         </Card>
       </Container>
     </>
