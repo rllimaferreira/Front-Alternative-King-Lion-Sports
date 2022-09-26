@@ -1,0 +1,30 @@
+.itemInfo {
+  margin-left: 1rem;
+  max-width:220px;
+}
+.itemInfo img {
+  width: 110px;
+  height: 110px;
+  object-fit:"contain"}
+
+.cartItem h4{
+  
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  font-weight: 700;
+  overflow: hidden;
+  max-height: 3.375rem;
+  color: rgb(66, 70, 77);
+  text-decoration: none;
+}
+.priceText{
+font-size: 1.1rem;
+}
+
+@media (max-width: 425px) {
+  .itemInfo img {
+    width: 70px;
+    height: 70px;
+  }
+
+}
