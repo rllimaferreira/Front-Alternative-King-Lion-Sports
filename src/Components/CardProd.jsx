@@ -8,13 +8,13 @@ function CardCont({ prod }) {
   return (<>
     <Card style={{ width: '18rem', margin: '0.5rem' }}>
       <Card.Img src={prod.image} />
-      <Card.Body>
+      <Card.Body id={prod.id}>
         <Card.Title>{prod.title}</Card.Title>
         <Card.Title>R$: {prod.price}</Card.Title>
         <Card.Text>{prod.brand}</Card.Text>
         <Card.Text>{prod.description}</Card.Text>
-        <Link className="link" to="/pg_prod">
-          <Button style={{ background: 'yellowgreen', border: 'thin' }}>buy now</Button>
+        <Link className="link" to="/pg_prod/{prod.id}">
+          <Button  style={{ background: 'yellowgreen', border: 'thin' }}>buy now</Button>
         </Link>
       </Card.Body>
     </Card>

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default function Prod() {
   return (
     <>
-      <Container className="mt-3">
+      <Container className="mt-3 mb-4">
         <h1>request: categoryName, brand, title</h1>
         <hr />
         <Card>
@@ -23,8 +23,8 @@ export default function Prod() {
             </div>
             <Link className="d-flex justify-content-between" to="/pg_carrinho" style={{ width: '9rem', color: 'yellowgreen' }}>
               <Button className="d-flex justify-content-between" style={{ width: '9rem', color: '#fff', background: 'yellowgreen', border: 'thin' }}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bag-check-fill" viewBox="0 0 16 16">
-                  <path fill-rule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bag-check-fill" viewBox="0 0 16 16">
+                  <path fillRule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                 </svg>
                 <p>Add to cart</p>
               </Button>
@@ -38,11 +38,6 @@ export default function Prod() {
           </Card.Body>
         </Card>
       </Container>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
     //Perdão pelos brs assinado por:felce kkk
   );
