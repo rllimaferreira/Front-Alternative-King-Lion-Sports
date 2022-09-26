@@ -1,8 +1,111 @@
+import React from "react";
 import "react-bootstrap/";
 import { Card, Button, Container } from "react-bootstrap/";
 import { Link } from "react-router-dom";
 import EmptyCart from "../../Components/EmptyCart";
 
+let productList = [
+  {
+    title: "Produto teste",
+    image: "https://imgnike-a.akamaihd.net/1300x1300/01091215.jpg",
+    price: 99.9
+  },
+  {
+    title: "Produto teste",
+    image: "https://imgnike-a.akamaihd.net/1300x1300/01091215.jpg",
+    price: 99.9
+  }
+];
+class Product extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      qnty: 0
+    };
+    // eventos
+    this.add = this.add.bind(this);
+    this.remove = this.remove.bind(this);
+  }
+
+  add() {
+    this.setState({
+      qnty: this.state.qnty + 1
+    });
+  }
+  remove() {
+    this.setState({
+      qnty: this.state.qnty - 1
+    });
+  }
+  // removeAll(){
+  //   this.setState({
+  //     qnty: this.state.qnty = 0
+  //   })
+  // }
+  render() {
+    return (
+      <>
+        <div className="row form-group">
+          <div className="col-sm-10">
+            <h4>
+              {this.props.title} : R${this.props.price}
+            </h4>
+          </div>
+          <div className="col-sm-2 text-right">Quantity: {this.props.qnty}</div>
+          <div className="row btn-toolbar">
+            <div className="col-6">
+              <button className="btn btn-outline-primary">Product Info</button>
+            </div>
+            <div className="col-6 text-right">
+              <button className="btn btn-outline-primary" onClick={"this.add"}>
+                +
+              </button>
+              <button
+                className="btn btn-outline-primary"
+                onClick={"this.remove"}
+              >
+                -
+              </button>
+            </div>
+          </div>
+        </div>
+        <hr />
+      </>
+    );
+  }
+}
+
+class CartList extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      productList: ""
+    };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ productList: productList });
+    }, 1000);
+  }
+  render() {
+    if (!this.state.productList) return <EmptyCart />;
+    
+    
+
+    var component = this;
+    var products = this.state.productList.map(function (product) {
+      return (
+        <Product
+        title={product.title}
+        image={product.image}
+        price={product.price}
+        />
+      );
+    });
+
+    return ({ products });
+  }
+}
 
 export default function Carrinho() {
   return (
@@ -143,23 +246,22 @@ export default function Carrinho() {
             <label>Check-out</label>
           </div>
         </div>
-
         <Card className="w-100">
           <div className="d-flex m-3 flex-row align-items-center justify-content-between">
             <div className="d-flex flex-row align-items-baseline">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              fill="currentColor"
-              className="bi bi-cart"
-              viewBox="0 0 16 16"
-            >
-              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-            </svg>
-           PRODUCT AND SHIPPING
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                fill="currentColor"
+                className="bi bi-cart"
+                viewBox="0 0 16 16"
+              >
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+              </svg>
+              PRODUCT AND SHIPPING
             </div>
-       
+
             <Button
               className="d-flex justify-content-between align-items-center"
               style={{
@@ -180,10 +282,10 @@ export default function Carrinho() {
               </svg>
               EMPTY CART
             </Button>
-        
           </div>
 
-          <EmptyCart />
+          <CartList />
+          
         </Card>
       </Container>
     </>
