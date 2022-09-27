@@ -2,36 +2,3 @@
     background-repeat: no-repeat; /*para a img n repetir*/
     background-position: top right;
 }
-
-.rowContainer{
-    margin-top: 8px;
-    
-}
-
-.colCard{
-    text-align: center;
-    height: 200px;
-   
-}
-
-.colCard:nth-child(2){
-    border-right: 1px solid black;
-    border-left: 1px solid black;
-    
-    
-}
-
-.colCard p{
-    font-size: 18px;
-}
-
-.colCard img{
-    margin: 8px;
-    width: 52px;
-    height: 52px;
- 
-}
-
-.thumbnailSelecao {
-    margin: 50px;
-}
