@@ -13,6 +13,8 @@ import img_card2 from '../../assets/icon/mastercard.svg'
 import img_card3 from '../../assets/icon/visa.svg'
 import img_boletocard from '../../assets/icon/boleto.svg'
 import selecaobr from '../../assets/imgs/selecaoBr.jpg'
+import camisasadidas from '../../assets/imgs/camisas_adidas.jpg'
+import ebiticon from '../../assets/icon/ebit-logo-5-1.png'
 
 import './Home.css'
 
@@ -67,6 +69,7 @@ export default function Home() {
         <Row className='rowContainer'>
           <Col className='colCard colCard d-flex justify-contente-center row ' sm={3}>
             <p>Pagamento rápido e seguro</p>
+            <img className='w-50 ' src={ebiticon}/>
           </Col>
           <Col className='colCard d-flex justify-contente-center row colCardBank' sm={6}>
             <p>Pacelamento em até 10x
@@ -97,12 +100,11 @@ export default function Home() {
         </div>
       </Container>
 
-      
       <Container>
         <div className='thumbnailSelecao d-flex justify-contente-center row'>
         <h3>Lançamento</h3>
         <hr />
-       <img className='d-block w-100 crs_img ' src={selecaobr}>
+       <img className='d-block w-100 crs_img ' src={camisasadidas}>
         </img>
         </div>
       </Container>
