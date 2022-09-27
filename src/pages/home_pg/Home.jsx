@@ -15,6 +15,11 @@ import img_boletocard from '../../assets/icon/boleto.svg'
 import selecaobr from '../../assets/imgs/selecaoBr.jpg'
 import camisasadidas from '../../assets/imgs/camisas_adidas.jpg'
 import ebiticon from '../../assets/icon/ebit-logo-5-1.png'
+import 'react-bootstrap/'
+
+import Card from 'react-bootstrap/Card';
+import CardGroup from 'react-bootstrap/CardGroup';
+import Button from 'react-bootstrap/Button';
 
 import './Home.css'
 
@@ -65,31 +70,37 @@ export default function Home() {
         </Carousel>
       </Container>
 
-      <Container>
-        <Row className='rowContainer'>
-          <Col className='colCard colCard d-flex justify-contente-center row ' sm={3}>
-            <p>Pagamento rápido e seguro</p>
-            <img className='w-50 ' src={ebiticon}/>
-          </Col>
-          <Col className='colCard d-flex justify-contente-center row colCardBank' sm={6}>
-            <p>Pacelamento em até 10x
-              com cartões de crédito</p>
-            <div className='imgCardBank d-flex justify-content-center '>
-              <img src={img_card1} />
-              <img src={img_card2} />
-              <img src={img_card3} />
-            </div>
-          </Col>
+      <CardGroup className='d-flex justify-content-around flex-wrap mt-3'>
+                    <Card>
+                    <Card.Body>
+                            <Card.Title>teste</Card.Title>
+                           
+                        </Card.Body>
+  
+                        <Card.Img  src={img_boletocard} />
+                       
+                    </Card>
 
-          <Col className='colCard cardBoleto colCard d-flex justify-contente-center row  ' sm={3}>
-            <p>Ou à vista no boleto
-              ou Pix</p>
-            <div className='d-flex justify-content-center '>
-              <img src={img_boletocard} />
-            </div>
-          </Col>
-        </Row>
-      </Container>
+                    <Card>
+                    <Card.Body>
+                            <Card.Title>teste</Card.Title>
+                           
+                        </Card.Body>
+  
+                        <Card.Img  src={img_boletocard} />
+                       
+                    </Card>
+                    <Card>
+                    <Card.Body>
+                            <Card.Title>teste</Card.Title>
+                           
+                        </Card.Body>
+  
+                        <Card.Img  src={img_boletocard} />
+                       
+                    </Card>
+
+                </CardGroup>
 
       <Container>
         <div className='thumbnailSelecao d-flex justify-contente-center row'>
