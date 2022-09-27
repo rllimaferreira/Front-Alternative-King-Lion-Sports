@@ -13,7 +13,7 @@ function CardCont({ prod }) {
         <Card.Title>R$: {prod.price}</Card.Title>
         <Card.Text>{prod.brand}</Card.Text>
         <Card.Text>{prod.description}</Card.Text>
-        <Link className="link" to="/pg_prod/{prod.id}">
+        <Link className="link" to={`/pg_prod/${prod.id}`}>
           <Button  style={{ background: 'yellowgreen', border: 'thin' }}>buy now</Button>
         </Link>
       </Card.Body>

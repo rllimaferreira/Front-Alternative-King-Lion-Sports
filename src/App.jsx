@@ -27,7 +27,7 @@ function App() {
     <Route path='/pg_carrinho' element={<Carrinho />}/>
     <Route path='/pg_sobre' element={<Sobre />}/>
     <Route path='/pg_404' element={<Errorpg />}/>    
-    <Route path='/pg_prod' element={<Prod />}/>
+    <Route path='/pg_prod/:id' element={<Prod />}/>
 
   </Routes>
   </ProductsContextProvider>
