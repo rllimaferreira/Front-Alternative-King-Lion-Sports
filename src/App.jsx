@@ -11,7 +11,7 @@ import Categories from './pages/categories_pg/Categories';
 import Carrinho from './pages/carrinho_pg/Carrinho';
 import Sobre from './pages/sobre_pg/Sobre';
 import Errorpg from './pages/error_pg/Errorpg';
-import Prod from './pages/prod_pg/prod';
+import Prod from './pages/prod_pg/Prod';
 
 function App() {
   

@@ -5,20 +5,36 @@ import Button from 'react-bootstrap/Button';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 
+
 export default function Prod() {
+  
   const { id } = useParams();
-  console.log(id);
-  const [prods, definirProds] = useState([]);
+  const [prods, definirProds] = useState({});
+
   useEffect(() => {
-    fetch(`http://52.53.150.144:8081/products/${id}`)
-      .then((respostaDoServidor) => {
-        return respostaDoServidor.json();
-      })
-      .then((resJson) => {
-        definirProds(resJson)
-        //console.log(resJson)
-      });
-  }, []);
+    const fetchById = async () => {
+      try {
+        const req = await fetch(`http://52.53.150.144:8081/products/${id}`)
+        const res = await req.json()
+        definirProds(res)
+      } catch (error) {
+        console.error(error)
+      }      
+    }
+    fetchById()
+  }, [])
+
+  // useEffect(() => {
+  //   fetch(`http://52.53.150.144:8081/products/${id}`)
+  //     .then((respostaDoServidor) => {
+  //       return respostaDoServidor.json();
+  //     })
+  //     .then((resJson) => {
+  //       definirProds(resJson)
+  //       //console.log(resJson)
+  //     });
+  // }, []);
+  
   return (
     <>
       <Container className="mt-3 mb-4">
@@ -44,10 +60,10 @@ export default function Prod() {
               </Button>
             </Link>
             <hr />
-            <Card.Text>
+            
               <Card.Title>Description:</Card.Title>
               {prods.description}
-            </Card.Text>
+            
           </Card.Body>
         </Card>
       </Container>
