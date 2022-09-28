@@ -14,7 +14,6 @@ import { ProductsContext } from '../Contexts/ProductsContext'
 //         <Card.Title>R$: {prod.price}</Card.Title>
 //         <Card.Text>{prod.brand}</Card.Text>
 //         <Card.Text>{prod.description}</Card.Text>
-
 //         <Link className="link" to={`/pg_prod/${prod.id}`}>
 //           <Button  style={{ background: 'yellowgreen', border: 'thin' }}>buy now</Button>
 //         </Link>
@@ -22,7 +21,7 @@ import { ProductsContext } from '../Contexts/ProductsContext'
 //     </Card>
 //   </>);
 // } // título*, descrição*, imagem*, avaliação
-// function CardProd() {
+// function Products() {
 //   const [prods, definirProds] = useState([]);
 //   useEffect(() => {
 //     fetch('http://52.53.150.144:8081/products')
@@ -38,7 +37,7 @@ import { ProductsContext } from '../Contexts/ProductsContext'
 //   </Container>
 //   );
 // }
-// export default CardProd;
+// export default Products;
 
 export default function Products () {
   const { products, setProducts } = useContext(ProductsContext)
@@ -55,9 +54,8 @@ export default function Products () {
                  <Card.Title>R$: {product.price}</Card.Title>
                  <Card.Text>{product.brand}</Card.Text>
                   <Card.Text>{product.description}</Card.Text>
-          
                  <Link className="link" to={`/pg_prod/${product.id}`}>
-                  <Button  style={{ background: 'yellowgreen', border: 'thin' }}>buy now</Button>
+                  <Button  style={{ background: 'yellowgreen', border: 'thin' }}>See details</Button>
                 </Link>
                 </Card.Body>
               </Card>

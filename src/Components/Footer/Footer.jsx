@@ -6,7 +6,7 @@ import "./Footer.css";
 export default function Footer() {
   return (
     <>
-    <footer className="CorNav w-100 d-flex flex-column align-items-center text-center">
+    <footer className="CorFooter w-100 d-flex flex-column align-items-center text-center">
       <div className="navFooter p-1">
         <Link className="navgationItem nav-link textStyleFooter" to="/">
         <img src={LogomarcaIco}/>
