@@ -3,11 +3,13 @@ import Container from "react-bootstrap/Container"
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { Link, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import CarrinhoContext from '../../Contexts/CarrinhoContext';
 
 
 export default function Prod() {
-  
+  const {state,setState}=useContext(CarrinhoContext)
+ 
   const { id } = useParams();
   const [prods, definirProds] = useState({});
 
@@ -35,6 +37,8 @@ export default function Prod() {
   //     });
   // }, []);
   
+  useEffect(()=>{
+localStorage.setItem('meuCarrinho', JSON.stringify(state))},[state])
   return (
     <>
       <Container className="mt-3 mb-4">
@@ -51,14 +55,17 @@ export default function Prod() {
               </svg>
               <p style={{ color: 'yellowgreen' }}>Free delivery</p>
             </div>
-            <Link className="d-flex justify-content-between" to="/pg_carrinho" style={{ width: '9rem', color: 'yellowgreen' }}>
-              <Button className="d-flex justify-content-between" style={{ width: '9rem', color: '#fff', background: 'yellowgreen', border: 'thin', height: '35px' }}>
+           
+              <Button 
+              onClick={()=> setState([...state,{...prods,qnt:1}])}
+              className="d-flex justify-content-between" 
+              style={{ width: '9rem', color: '#fff', background: 'yellowgreen', border: 'thin', height: '35px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bag-check-fill" viewBox="0 0 16 16">
                   <path fillRule="evenodd" d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0zm-.646 5.354a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z" />
                 </svg>
                 <p>Add to cart</p>
               </Button>
-            </Link>
+           
             <hr />
             
               <Card.Title>Description:</Card.Title>

@@ -12,11 +12,15 @@ import Carrinho from './pages/carrinho_pg/Carrinho';
 import Sobre from './pages/sobre_pg/Sobre';
 import Errorpg from './pages/error_pg/Errorpg';
 import Prod from './pages/prod_pg/Prod';
+import { ShopProvider } from './Contexts/CarrinhoContext';
 
 function App() {
   
+  
   return (
   <>
+  <ShopProvider >
+
   <NavAndSid_Bar/>
   <ProductsContextProvider>
   <Routes>
@@ -31,6 +35,7 @@ function App() {
 
   </Routes>
   </ProductsContextProvider>
+  </ShopProvider>
   <Footer/>
   </>
   )
