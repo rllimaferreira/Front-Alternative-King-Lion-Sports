@@ -4,10 +4,15 @@ import { Card, Button, Container } from "react-bootstrap/";
 import { Link } from "react-router-dom";
 import EmptyCart from "../../Components/EmptyCart";
 import "./Carrinho.css";
+import CarrinhoContext from "../../Contexts/CarrinhoContext";
+import { useContext } from "react";
 
 export default function Carrinho() {
+  const {state,setState} = useContext(CarrinhoContext)
+  console.log(state)
   return (
     <>
+
       <Container className="mt-3 mb-3 d-flex flex-column align-items-center">
         <div className="buyingSteps d-none d-md-flex d-xl-flex">
           <div className="steppCarrinho d-flex flex-column align-items-center">
