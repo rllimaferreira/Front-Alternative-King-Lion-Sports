@@ -70,52 +70,44 @@ export default function Home() {
         </Carousel>
       </Container>
 
-      <CardGroup className='d-flex justify-content-around flex-wrap mt-3'>
-                    <Card>
-                    <Card.Body>
-                            <Card.Title>teste</Card.Title>
-                           
-                        </Card.Body>
-  
-                        <Card.Img  src={img_boletocard} />
-                       
-                    </Card>
+      <Container className='mt-5 mb-4'>
+        <Row className='g-4 justify-content-center row'>
+          <Col sm={3} md={4} className='colCards row justify-content-center '>
+            <p>Pagamento rapido
+              e seguro </p>
+            <img src={img_boletocard} />
+          </Col>
+          <Col sm={5} md={4} className='colCards row justify-content-center border' style={{borderWidth:3}}>
+            <p>Pacelamento em até 10x
+              com cartões de crédito</p>
+            <img src={img_card1} />
+            <img src={img_card2} />
+            <img src={img_card3} />
+          </Col>
+          <Col sm={3} md={4} className='colCards row justify-content-center '>
+            <p>Ou à vista no boleto
+              ou Pix</p>
+            <img src={img_boletocard} />
+          </Col>
+        </Row>
 
-                    <Card>
-                    <Card.Body>
-                            <Card.Title>teste</Card.Title>
-                           
-                        </Card.Body>
-  
-                        <Card.Img  src={img_boletocard} />
-                       
-                    </Card>
-                    <Card>
-                    <Card.Body>
-                            <Card.Title>teste</Card.Title>
-                           
-                        </Card.Body>
-  
-                        <Card.Img  src={img_boletocard} />
-                       
-                    </Card>
 
-                </CardGroup>
-
+      </Container>
+      
       <Container>
         <div className='thumbnailSelecao d-flex justify-contente-center row'>
         <h3>Seleção Brasileira</h3>
         <hr />
-       <img className='d-block w-100 crs_img ' src={selecaobr}>
+       <img className='w-100 crs_img ' src={selecaobr}>
         </img>
         </div>
       </Container>
 
-      <Container>
+      <Container className='mt-5 mb-4'>
         <div className='thumbnailSelecao d-flex justify-contente-center row'>
         <h3>Lançamento</h3>
         <hr />
-       <img className='d-block w-100 crs_img ' src={camisasadidas}>
+       <img className='w-100 crs_img ' src={camisasadidas}>
         </img>
         </div>
       </Container>

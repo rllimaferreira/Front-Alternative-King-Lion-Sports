@@ -1,1 +1,9 @@
 
+.colCards img{
+    width: 4em;
+    height: 4em;
+}
+
+.colCards{
+    padding: 2em;
+}
