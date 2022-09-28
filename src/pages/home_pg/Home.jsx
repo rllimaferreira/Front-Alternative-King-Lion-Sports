@@ -14,7 +14,7 @@ import img_card3 from '../../assets/icon/visa.svg'
 import img_boletocard from '../../assets/icon/boleto.svg'
 import selecaobr from '../../assets/imgs/selecaoBr.jpg'
 import camisasadidas from '../../assets/imgs/camisas_adidas.jpg'
-import ebiticon from '../../assets/icon/ebit-logo-5-1.png'
+import ebiticon from '../../assets/icon/ebitlabel.svg'
 import 'react-bootstrap/'
 
 import Card from 'react-bootstrap/Card';
@@ -75,9 +75,9 @@ export default function Home() {
           <Col sm={3} md={4} className='colCards row justify-content-center '>
             <p>Pagamento rapido
               e seguro </p>
-            <img src={img_boletocard} />
+            <img src={ebiticon} />
           </Col>
-          <Col sm={5} md={4} className='colCards row justify-content-center border' style={{borderWidth:3}}>
+          <Col sm={5} md={4} className='colCards row justify-content-center border' style={{borderWidth:1}}>
             <p>Pacelamento em até 10x
               com cartões de crédito</p>
             <img src={img_card1} />
