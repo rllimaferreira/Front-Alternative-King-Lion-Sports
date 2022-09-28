@@ -16,6 +16,7 @@ import { ShopProvider } from './Contexts/CarrinhoContext';
 
 function App() {
   
+  
   return (
   <>
   <ShopProvider >

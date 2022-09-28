@@ -37,6 +37,8 @@ export default function Prod() {
   //     });
   // }, []);
   
+  useEffect(()=>{
+localStorage.setItem('meuCarrinho', JSON.stringify(state))},[state])
   return (
     <>
       <Container className="mt-3 mb-4">
@@ -55,7 +57,7 @@ export default function Prod() {
             </div>
            
               <Button 
-              onClick={()=> setState({...state,prods})}
+              onClick={()=> setState([...state,{...prods,qnt:1}])}
               className="d-flex justify-content-between" 
               style={{ width: '9rem', color: '#fff', background: 'yellowgreen', border: 'thin', height: '35px' }}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-bag-check-fill" viewBox="0 0 16 16">

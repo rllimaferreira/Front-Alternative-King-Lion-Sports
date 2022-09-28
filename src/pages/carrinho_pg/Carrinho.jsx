@@ -1,18 +1,147 @@
 import React from "react";
 import "react-bootstrap/";
 import { Card, Button, Container } from "react-bootstrap/";
-import { Link } from "react-router-dom";
 import EmptyCart from "../../Components/EmptyCart";
 import "./Carrinho.css";
 import CarrinhoContext from "../../Contexts/CarrinhoContext";
-import { useContext } from "react";
+import { useContext, useState,useEffect } from "react";
 
 export default function Carrinho() {
-  const {state,setState} = useContext(CarrinhoContext)
-  console.log(state)
+  const { state, setState } = useContext(CarrinhoContext);
+  useEffect(()=>{
+    localStorage.setItem('meuCarrinho', JSON.stringify(state))},[state])
+  function CardItem({ item }) {
+    const [qnt, setQnt] = useState(1);
+    
+    return (
+      <>
+        <div className="cabecalho d-flex m-3 flex-row align-items-center justify-content-between">
+          <div className="d-flex flex-row align-items-baseline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="bi bi-cart"
+              viewBox="0 0 16 16"
+            >
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+            PRODUCT AND SHIPPING
+          </div>
+
+          <Button
+            onClick={() => setState([])}
+            className="d-flex justify-content-between align-items-center"
+            style={{
+              color: " rgb(231, 38, 38)",
+              background: "transparent",
+              border: "1px solid rgb(231, 38, 38)"
+            }}
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              className="bi bi-trash-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
+            </svg>
+            EMPTY CART
+          </Button>
+        </div>
+
+        <div className="cartItem container d-flex flex-column w-75">
+          {/* desktop cartItem */}
+          <div className="d-none d-md-flex d-xl-flex flex-row justify-content-between ">
+            <div className="itemInfo d-flex flex-row">
+              <img src={item.image} />
+
+              <h4 className="cartItemName">
+                {item.categories[0].name}
+                {item.title}
+              </h4>
+            </div>
+
+            <div className="d-flex flex-column align-items-center">
+              <h4>Quantity</h4>
+              <div>
+                <Button
+                  className="btn btn-outline-primary bg-light"
+                  onClick={() =>setQnt(qnt-1)}
+                >
+                  -
+                </Button>
+                <div className="p-1">{qnt}</div>
+                <Button
+                  className="btn  btn-outline-primary bg-light"
+                  onClick={() =>setQnt(qnt+1)}
+                >
+                  +
+                </Button>
+              </div>
+            </div>
+            <div className="d-flex flex-column align-items-center">
+              <h4>Price</h4>
+              <div className="priceText text-center">
+                <div>Item Price</div>
+                R${item.price}
+              </div>
+              <div className="priceText text-center">
+                <div>Total Itens Price</div>
+                R${item.price *qnt}
+              </div>
+            </div>
+          </div>
+
+          {/* mobile cartItem */}
+          <div className="d-sm-flex d-md-none d-xl-none flex-column mt-1">
+            <div className="itemInfo d-flex flex-row">
+              <img src={item.image} />
+              <div className="d-flex flex-column">
+                <h4 className="cartItemName text-center">
+                  {item.categories[0].name}
+                  {item.title}
+                </h4>
+                <div className="priceText text-center">
+                  <div>Item Price</div>
+                  R${item.price}
+                </div>
+                <div className="priceText text-center">
+                  <div>Total Itens Price</div>
+                  R${item.price * item.qnt}
+                </div>
+              </div>
+            </div>
+
+            <div className="d-flex flex-column align-items-center mt-3">
+              <h4>Quantity</h4>
+              <div>
+              <Button
+                  className="btn btn-outline-primary bg-light"
+                  onClick={() =>setQnt(qnt-1) }
+                >
+                  -
+                </Button>
+                <div className="p-1">{qnt}</div>
+                <Button
+                  className="btn  btn-outline-primary bg-light"
+                  onClick={() =>setQnt(qnt+1)}
+                >
+                  +
+                </Button>
+              </div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </>
+    );
+  }
   return (
     <>
-
       <Container className="mt-3 mb-3 d-flex flex-column align-items-center">
         <div className="buyingSteps d-none d-md-flex d-xl-flex">
           <div className="steppCarrinho d-flex flex-column align-items-center">
@@ -150,118 +279,13 @@ export default function Carrinho() {
           </div>
         </div>
         <Card className="w-100">
-          <div className="d-flex m-3 flex-row align-items-center justify-content-between">
-            <div className="d-flex flex-row align-items-baseline">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                className="bi bi-cart"
-                viewBox="0 0 16 16"
-              >
-                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
-              </svg>
-              PRODUCT AND SHIPPING
-            </div>
+          {state.length > 0 ? (
+            state?.map((m) => <CardItem item={m} key={m.title} />)
+          ) : (
+            <EmptyCart />
+          )}
 
-            <Button
-              className="d-flex justify-content-between align-items-center"
-              style={{
-                color: " rgb(231, 38, 38)",
-                background: "transparent",
-                border: "1px solid rgb(231, 38, 38)"
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                fill="currentColor"
-                className="bi bi-trash-fill"
-                viewBox="0 0 16 16"
-              >
-                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z" />
-              </svg>
-              EMPTY CART
-            </Button>
-          </div>
-
-          <EmptyCart />
-
-          <div className="cartItem container d-flex flex-column w-75">
-            {/* desktop cartItem */}
-            <div className="d-none d-md-flex d-xl-flex flex-row justify-content-between ">
-              <div className="itemInfo d-flex flex-row">
-                <img src="https://images.kabum.com.br/produtos/fotos/359543/notebook-lenovo-ultrafino-ideapad-3i-intel-core-i7-10510u-geforce-mx330-8gb-ram-ssd-256gb-15-6-full-hd-windows-11-prata-82bs000hbr_1656619969_gg.jpg" />
-
-                <h4 className="cartItemName">Título Teste</h4>
-              </div>
-
-              <div className="d-flex flex-column align-items-center">
-                <h4>Quantity</h4>
-                <div>
-                  <button
-                    className="btn btn-outline-primary"
-                    // onClick={"this.add"}
-                  >
-                    +
-                  </button>
-                  1
-                  <button
-                    className="btn btn-outline-primary"
-                    // onClick={"this.remove"}
-                  >
-                    -
-                  </button>
-                </div>
-              </div>
-              <div className="d-flex flex-column align-items-center">
-                <h4>Price</h4>
-                <div className="priceText">R$18,00</div>
-              </div>
-            </div>
-
-            {/* mobile cartItem */}
-            <div className="d-sm-flex d-md-none d-xl-none flex-column mt-1">
-              <div className="itemInfo d-flex flex-row">
-                <img src="https://images.kabum.com.br/produtos/fotos/359543/notebook-lenovo-ultrafino-ideapad-3i-intel-core-i7-10510u-geforce-mx330-8gb-ram-ssd-256gb-15-6-full-hd-windows-11-prata-82bs000hbr_1656619969_gg.jpg" />
-                <div className="d-flex flex-column">
-                  <h4 className="cartItemName text-center">
-                    Notebook lenove ideapad fodao
-                  </h4>
-                  <div className="priceText text-center">
-                    <div>
-                    Itens Price
-                    </div>
-                    R$18,00</div>
-                </div>
-              </div>
-
-              <div className="d-flex flex-column align-items-center mt-3">
-                <h4>Quantity</h4>
-                <div>
-                  <button
-                    className="btn btn-outline-primary"
-                    // onClick={"this.add"}
-                  >
-                    +
-                  </button>
-                  1
-                  <button
-                    className="btn btn-outline-primary"
-                    // onClick={"this.remove"}
-                  >
-                    -
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <hr />
-          </div>
-
-        
+          <div>Total :</div>
         </Card>
       </Container>
     </>
