@@ -13,11 +13,12 @@ function NavAndSid_Bar() {
     <header>
       <Navbar expand="lg" className="CorNav">
         <Container>
-          <Navbar.Brand>
-           <Link to="/">
+          <Navbar.Brand >
+           <Link className="nav-link d-flex flex-column align-items-center" to="/">
               <img width="40"
                 height="40"
                 src={LogomarcaIco} />
+                <h1 style={{ fontSize: '13px'}}>King Lion</h1>
             </Link>
           </Navbar.Brand>
           
@@ -33,12 +34,12 @@ function NavAndSid_Bar() {
               <Link className="nav-link" to="/pg_products">
                 Products
               </Link>
-              <Link className="nav-link" to="/pg_categories">
-                Categories
-              </Link>
               <Link className="nav-link" to="/pg_sobre">
                 About Us
               </Link>
+         {/* <Link className="nav-link" to="/pg_categories">
+                Categories
+              </Link> */}
             </Nav>
             <Link className="nav-link" to="/pg_carrinho">
               <svg
