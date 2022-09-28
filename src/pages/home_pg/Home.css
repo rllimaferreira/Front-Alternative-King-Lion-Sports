@@ -1,4 +1,9 @@
-.crs_img {
-    background-repeat: no-repeat; /*para a img n repetir*/
-    background-position: top right;
+
+
+.colCards img{
+    width: 5em;
+    height: 5em;
 }
+
+.colCards{
+    padding: 2em;
