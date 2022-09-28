@@ -18,8 +18,10 @@ export const ProductsContextProvider = props => {
   }, [])
 
   return (
+    <>
     <ProductsContext.Provider value={{ products, setProducts }}>
       {props.children}
     </ProductsContext.Provider>
+    </>
   )
 }

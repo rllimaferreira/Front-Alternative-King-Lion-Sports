@@ -5,6 +5,7 @@ import "./Footer.css";
 
 export default function Footer() {
   return (
+    <>
     <footer className="CorNav w-100 d-flex flex-column align-items-center text-center">
       <div className="navFooter p-1">
         <Link className="navgationItem nav-link textStyleFooter" to="/">
@@ -28,7 +29,7 @@ export default function Footer() {
         </Link>
       </div>
       <span className="lineBreakSmall" />
-      <p className="textStyleFooter">Social Mídia</p>
+      <p className="textStyleFooter">Social Media</p>
      
       <div className="SocialMidia d-flex flex-row">
         <Link className="socialIco nav-link" to="#">
@@ -49,5 +50,6 @@ export default function Footer() {
         <br/><br/>
         Copyright © 2022 All rights reserved King Lion Ecommerce</p>
     </footer>
+    </>
   );
 }
