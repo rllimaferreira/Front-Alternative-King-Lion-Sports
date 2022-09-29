@@ -26,7 +26,7 @@ export default function Home() {
 
   return (
     <>
-      <Container className="mt-3" style={{ margin: '55px' }}>
+      <Container className="mt-3" style={{ marginBottom: '55px' }}>
         <h1>Home</h1>
         <hr />
         <Carousel >
