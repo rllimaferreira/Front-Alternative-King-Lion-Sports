@@ -25,7 +25,7 @@ export default function Admin() {
     }
     try {
       const req = await fetch(
-        `http://52.53.150.144:8081/products/${id}`,
+        `http://back_server_ecommerce:8080/products/${id}`,
         reqParams
       )
       if (req.status == 204) {
