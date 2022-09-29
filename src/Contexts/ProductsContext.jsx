@@ -7,7 +7,7 @@ export const ProductsContextProvider = props => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const request = await fetch('http://52.53.150.144:8081/products')
+        const request = await fetch('http://back_server_ecommerce:8080/products')
         const response = await request.json()
         setProducts(response)
       } catch (error) {
